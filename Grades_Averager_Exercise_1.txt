@@ -1,0 +1,120 @@
+//Name        : Tyler Davis
+//Program     : Grades Averager 
+//Date        : 8.27.2018
+//Professor   : Jeff Joiner 
+//Last Edited : 9:20PM 8.27.2018
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+void printDirections() {
+
+	cout << "Welcome to the GPA Calculator V1\n";
+	cout << "Created By Tyler Davis\n";
+
+}
+
+void averageGrades(int grades) {
+
+	if (grades <= 100 && grades >= 90) {
+		cout << "You've received an A.\n";
+	} else if (grades <= 89 && grades >= 80) {
+		cout << "You've received a B.\n";
+	} else if (grades <= 79 && grades >= 70) {
+		cout << "You've received a C.\n";
+	} else if (grades <= 69 && grades >= 60) {
+		cout << "You've received a D.\n";
+	} else if (grades <= 59 && grades >= 0) {
+		cout << "You've received a F.\n";
+	} else {
+		cout << "I'm sorry an error occurred.\n";
+	}
+
+}
+
+int getGrades() {
+
+	int grades = 0;
+
+	cout << "Please enter a grade!\n";
+	cin >> grades;
+
+	while (grades >100 || grades <-1) {
+		cout << "I'm sorry you have entered and invalid number.\n";
+		getGrades();
+	}
+
+	averageGrades(grades);
+
+	return grades;
+}
+
+void displayResults(double fAverage, int gCounter) {
+
+	if (gCounter > 1) {
+		cout << "You have entered " << gCounter << " grades.\n";
+	} else {
+		cout << "You have entered " << gCounter << " grade.\n";
+	}
+	
+	cout << "You final grade average is " << fAverage << ".\n";
+
+}
+
+void averageAllGrades(int sumGrades, int counterGrades) {
+
+	double finalAverage = 0.0;
+
+	finalAverage = (sumGrades / counterGrades);
+	displayResults(finalAverage, counterGrades);
+	averageGrades(finalAverage);
+
+}
+
+int getInput() {
+
+	int input = 0;
+
+	cout << "Please press 1 to enter a grade or -1 to quit.\n";
+	cin >> input;
+
+	if (input != 1 && input != -1) {
+		cout << "You have entered and invalid character\n";
+		cout << "Please press 1 to continue or -1 to quit.\n";
+		cin >> input;
+	}
+
+	return input;
+
+}
+
+void startGPACalc() {
+
+	int returnedGrade = 0;
+	int gradesCounter = 0;
+	int gradesSum = 0;
+	int userInput = 0;
+
+	printDirections();
+	userInput = getInput();
+
+	while (userInput != -1) {
+		returnedGrade = getGrades();
+		gradesCounter++;
+		gradesSum += returnedGrade;
+		userInput = getInput();
+	}
+
+	averageAllGrades(gradesSum, gradesCounter);
+
+}
+
+int main()
+{
+	startGPACalc();
+	return 0;
+
+}
+
